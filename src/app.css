@@ -11,6 +11,9 @@
 .background {
     background-color: #0b0c10;
 }
+.background_secondary {
+    background-color: #1F2833;
+}
 
 .primary {
     color: #66FCF1;
@@ -26,5 +29,9 @@
 
 .quadrary {
     color: #1F2833;
+}
+
+.vh-screen {
+    height: 86vh;
 }
 
