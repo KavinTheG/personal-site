@@ -1,11 +1,21 @@
 <script>
-  // You can import any necessary modules here
+  // @ts-ignore
+  function scrollIntoView({ target }) {
+		const el = document.querySelector(target.getAttribute('href'));
+		if (!el) return;
+    el.scrollIntoView({
+      behavior: 'smooth'
+    });
+  }
 </script>
 
-<nav class="background">
-  <div class="flex items-baseline  justify-end">
-    <a href="/" class="triary hover:text-cyan-300 rounded-md font-medium mr-12 ">About</a>
-    <a href="/" class="triary hover:text-cyan-300 rounded-md font-medium mr-12">Projects</a>
-    <a href="/" class="triary hover:text-cyan-300 rounded-md font-medium">Contact</a>
-  </div>
-</nav>
+<header class="sticky top-0 flex background items-baseline justify-end py-5 px-20">
+  <nav class="flex flex-grow justify-end">
+      <a href="#about" class="triary hover:text-cyan-300 rounded-md font-medium mr-12 "
+        on:click|preventDefault={scrollIntoView}>About</a>
+      <a href="#projects" class="triary hover:text-cyan-300 rounded-md font-medium mr-12"
+        on:click|preventDefault={scrollIntoView}>Projects</a>
+      <a href="/" class="triary hover:text-cyan-300 rounded-md font-medium"
+        on:click|preventDefault={scrollIntoView}>Contact</a>
+  </nav>
+</header>

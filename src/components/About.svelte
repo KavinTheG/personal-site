@@ -34,7 +34,8 @@
             <!-- Image div -->
             <div class="h-full flex justify-center items-center ">
                 <img src="../assets/profile-pic.png" alt="Kavin G" 
-                class="max-w-full max-h-full w-72 border-2 p-2 border-cyan-800">
+                class=" w-3/5 border-double border-4 p-2 border-cyan-800"
+                transition:fade={{ delay: 400 }}>
             </div>
         </div>
     </div>
