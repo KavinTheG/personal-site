@@ -3,19 +3,24 @@
     import Navbar from "../components/Navbar.svelte";
     import About from "../components/About.svelte";
     import Projects from "../components/Projects.svelte";
+    import Contact from "../components/Contact.svelte";
 
 </script>
 
-    <Navbar />
+ 
 <div class="background px-20 py-10">
-
+    <Navbar/>
 
     <section id="about">
         <About/>
     </section>
 
     <section id="projects">
-    <Projects/>
+        <Projects/>
+    </section>
+
+    <section id="contact">
+        <Contact/>
     </section>
 </div>
 <slot />
