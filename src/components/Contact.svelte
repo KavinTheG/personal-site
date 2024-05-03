@@ -16,6 +16,8 @@
 <footer class="w-full-200 py-8">
     <div class="container mx-auto flex flex-col justify-center items-center">
 
+        <h1 class="text-4xl triary font-bold mb-6 mt-20">Socials</h1>
+
         <div class="contact-icons">
         {#each contactInfoDim as { src, alt, link }}
             <a href={link} target="_blank" rel="noopener noreferrer">

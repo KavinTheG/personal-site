@@ -2,6 +2,8 @@
   import IntersectionObserver from "svelte-intersection-observer";
   import { fade } from "svelte/transition";
 
+  export let marginValue;
+
   /**
      * @type {HTMLDivElement}
      */
@@ -18,7 +20,7 @@
         <div transition:fade={{ delay: 200 }} class=" my-10 flex flex-col justify-center items-center">
             <!-- Project  cards -->
 
-            <div class=" card rounded-2xl flex justify-center items-center">
+            <div class=" card rounded-2xl flex justify-center items-center {marginValue}">
                 <div class=" card-wrapper background_secondary rounded-2xl z-10">        
                         <div class="project-info  min-h-0 min-w-0">
                             <!-- image -->
@@ -97,7 +99,6 @@
 }
 .card {
     position: relative;
-    width: 75%;
     display: flex;
     justify-content: center;
     min-height: 340px;
