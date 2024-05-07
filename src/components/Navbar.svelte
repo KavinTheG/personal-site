@@ -15,8 +15,7 @@
         on:click|preventDefault={scrollIntoView}>About</a>
       <a href="#projects" class="triary hover:text-cyan-300 rounded-md font-medium mr-12"
         on:click|preventDefault={scrollIntoView}>Projects</a>
-      <a href="#contact" class="triary hover:text-cyan-300 rounded-md font-medium"
-        on:click|preventDefault={scrollIntoView}>Contact & Socials</a>
+      <a href="/blog" class="triary hover:text-cyan-300 rounded-md font-medium">Blog</a>
   </nav>
 </header>
 

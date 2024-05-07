@@ -8,19 +8,10 @@
 </script>
 
  
-<div class="background px-20 py-10">
+<div class="background px-20 py-2">
     <Navbar/>
 
-    <section id="about">
-        <About/>
-    </section>
 
-    <section id="projects">
-        <Projects/>
-    </section>
 
-    <section id="contact">
-        <Contact/>
-    </section>
 </div>
 <slot />
