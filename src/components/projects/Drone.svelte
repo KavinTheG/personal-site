@@ -30,7 +30,7 @@
 
                             <!-- description -->
                             <div class="w-1/2 min-w-0 flex flex-col mx-8">
-                                <h1 class="text-3xl secondary pt-8 ">Embedded Rust Flight Controller</h1>
+                                <h1 class="text-3xl secondary pt-8">Embedded Rust Flight Controller</h1>
                                 
                                 <p class="secondary pt-4">
                                     This projects aims to achieve reliable flight performance with a custom built flight controller. It is built on top of the STM32F411
@@ -46,7 +46,6 @@
                                         {:else}
                                         <img src="../assets/github-dim.png" alt="github logo" aria-hidden="true" class="w-12 h-12">
                                         {/if}
-                                    
                                     </a>
                                 </div>
                             </div>
@@ -65,8 +64,8 @@
     .project-info {
         display: flex;
         border-radius: 5px;
-
     }
+
 
     .image-container {
         flex: 0 0 auto;
