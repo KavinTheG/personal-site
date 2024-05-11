@@ -103,7 +103,6 @@
     
     display: flex;
     justify-content: center;
-    min-height: 340px;
     align-items: center;
     overflow: hidden;
 

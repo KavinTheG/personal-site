@@ -11,12 +11,13 @@
 
 <header class="sticky top-0 flex background items-baseline justify-end py-5 ">
   <nav class="flex flex-grow justify-end">
-      <a href="#about" class="triary hover:text-cyan-300 rounded-md font-medium mr-12 "
+      <a href="#about" class="triary hover:text-cyan-300 rounded-md font-medium ml-12 "
         on:click|preventDefault={scrollIntoView}>About</a>
-      <a href="#projects" class="triary hover:text-cyan-300 rounded-md font-medium mr-12"
+      <a href="#projects" class="triary hover:text-cyan-300 rounded-md font-medium ml-12"
         on:click|preventDefault={scrollIntoView}>Projects</a>
-      <a href="#contact" class="triary hover:text-cyan-300 rounded-md font-medium"
+      <a href="#contact" class="triary hover:text-cyan-300 rounded-md font-medium ml-12 "
         on:click|preventDefault={scrollIntoView}>Contact & Socials</a>
+      <a href="/blog" class="triary hover:text-cyan-300 rounded-md font-medium ml-12">Blog</a>
   </nav>
 </header>
 

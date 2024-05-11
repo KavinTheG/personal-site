@@ -24,3 +24,9 @@
     </section>
 </div>
 <slot />
+
+<style>
+    body {
+        background-color: #0b0c10;
+    }
+</style>
