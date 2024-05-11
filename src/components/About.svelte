@@ -12,7 +12,7 @@
 <IntersectionObserver once element={node} let:intersecting>
   <div bind:this={node}>
     {#if intersecting}
-<div class="h-screen flex flex-col justify-center">
+<div class="flex flex-col justify-center">
     <div class="flex-1 flex justify-center items-center">
         <div class="w-1/2">
             <h1 class="text-6xl font-bold triary" transition:fade={{ delay: 200 }}>Hello,</h1>
