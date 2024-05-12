@@ -17,8 +17,8 @@
 <IntersectionObserver once element={node} let:intersecting>
   <div bind:this={node}>
     {#if intersecting}
-      <div class="h-screen flex flex-col justify-center items-center" transition:fade={{ delay: 500 }}>
-        <h1 class="text-5xl pb-10 secondary">My Projects & Experience</h1>
+      <div class="min-h-screen flex flex-col justify-center items-center" transition:fade={{ delay: 500 }}>
+        <h1 class="text-5xl mt-10 secondary">My Projects & Experience</h1>
         
           <Drone/>
           <Uoav/>

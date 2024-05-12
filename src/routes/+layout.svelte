@@ -11,22 +11,18 @@
 <div class="background px-20 py-10">
     <Navbar/>
 
-    <!-- <section id="about"> -->
+    <section id="about"> 
         <About/>
-    <!-- </section> -->
+    </section> 
 
-    <!-- <section id="projects"> -->
+    <section id="projects">
         <Projects/>
-    <!-- </section> -->
+    </section>
 
-    <!-- <section id="contact"> -->
+    <section id="contact"> 
         <Contact/>
-    <!-- </section> -->
+    </section> 
 </div>
+
 <slot />
 
-<style>
-    body {
-        background-color: #0b0c10;
-    }
-</style>
