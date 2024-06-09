@@ -60,17 +60,17 @@
     {#if intersecting}
       <div class="min-h-screen flex flex-col justify-center">
         <div
-          class="flex-1 flex flex-col justify-center items-center sm:flex-row"
+          class="flex-1 flex flex-col sm:flex-row sm:justify-center sm:items-center"
         >
           <!-- Text section -->
-          <div class="w-full sm:w-1/2 mb-4 sm:mb-0">
+          <div class="w-full sm:w-1/2 mb-4 sm:mb-0 order-2 sm:order-1">
             <h1
-              class="text-6xl font-bold triary"
+              class="text-4xl sm:text-6xl font-bold triary"
               transition:fade={{ delay: 200 }}
             >
               Hello,
             </h1>
-            <h2 class="text-6xl font-bold py-2">
+            <h2 class="text-4xl sm:text-6xl font-bold py-2">
               <span class="triary" transition:fade={{ delay: 200 }}>I'm</span>
               <span class="primary" transition:fade={{ delay: 300 }}>Kavin</span
               >
@@ -83,9 +83,7 @@
               </p>
             </div>
             <div class="container mx-auto flex flex-col justify-center items-center">
-              
               <div class="contact-icons">
-
                 {#each contactInfoDim as dimItem, index}
                   <a href={dimItem.link} on:mouseenter={() => hoveredIndex = index}
                     on:mouseleave={() => hoveredIndex = null}
@@ -94,14 +92,12 @@
                     <img src={hoveredIndex === index ? contactInfoBright[index].src : dimItem.src} alt={dimItem.alt} />
                   </a>
                 {/each}
-
-                
               </div>
             </div>
           </div>
 
           <!-- Image section -->
-          <div class="w-full sm:w-1/2 flex justify-end items-end">
+          <div class="w-full sm:w-1/2 flex justify-center sm:justify-end items-center order-1 sm:order-2">
             <div class="w-full max-w-xs">
               <img
                 src="../assets/profile-pic.png"

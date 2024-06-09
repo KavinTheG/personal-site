@@ -9,7 +9,7 @@
 </script>
 
  
-<div class="background px-[20rem] py-10">
+<div class="background px-[15%]  py-10">
     <Navbar/>
 
     <section id="about"> 

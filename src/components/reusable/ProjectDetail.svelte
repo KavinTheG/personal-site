@@ -102,6 +102,7 @@
         overflow: hidden;
         border-radius: rounded-2xl;
         padding: 0.05rem;
+        min-width: 350;
     }
 
     .card:hover::before {
@@ -119,6 +120,7 @@
         position: relative;
         display: flex;
         z-index: 12;
+        margin: 0.05rem 0.025rem;
         justify-content: center;
         align-items: center;
     }

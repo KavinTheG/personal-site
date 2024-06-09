@@ -15,7 +15,7 @@
     });
   }
 </script>
-<header class="sticky top-0 background py-5 px-20">
+<header class="sticky top-0 background py-5 px-5">
   <div class="flex justify-end items-center ">
     <button class="sm:hidden triary hover:text-cyan-300 p-2" on:click={toggleMenu}>
       <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">

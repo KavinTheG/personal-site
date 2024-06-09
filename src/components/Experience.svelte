@@ -15,6 +15,7 @@
      * @type {HTMLDivElement}
      */
   let node;
+
 </script>
 
 <!-- Icons from: https://icons8.com/pricing -->
@@ -39,7 +40,7 @@
 			</TimelineDot>
 			<TimelineConnector />
 		</TimelineSeparator>
-		<TimelineContent style={'height: 250px;'}>
+		<TimelineContent style={'height: auto;'}>
 			<h2>Agriculture and Agri-Food Canada</h2>
             <h3>System Administrator</h3>
 			<ul>
@@ -64,7 +65,7 @@
 			</TimelineDot>
 			<TimelineConnector />
 		</TimelineSeparator>
-		<TimelineContent style={'height: 250px;'}>
+		<TimelineContent style={'height: auto;'}>
 			<h2>uOttawa Autonomous Vehicle Team</h2>
             <h3>Software Developer</h3>
 			<ul>
@@ -88,7 +89,7 @@
 			</TimelineDot>
 			<TimelineConnector />
 		</TimelineSeparator>
-		<TimelineContent style={'height: 250px;'}>
+		<TimelineContent style={'height: auto;'}>
 			<h2>Government of Canada</h2>
             <h3>Full Stack Developer</h3>
             <ul>
@@ -107,10 +108,13 @@
 </IntersectionObserver>
 
 <style>
+
+
 	li, ul, p {
 		margin: px 0;
 		color: #c5c6c7;
 	}
+
 
     ul {
         list-style: disc;

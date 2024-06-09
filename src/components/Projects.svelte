@@ -41,7 +41,7 @@
     {#if intersecting}
       <div class="min-h-screen flex flex-col justify-center items-center" transition:fade={{ delay: 500 }}>
         <h1 class="text-5xl my-10 secondary">My Projects</h1>
-          <div class="">
+          <div class="w-[80%]">
             <!-- Drone -->
             <ProjectDetail  
               imageSrc={droneProject.imageSrc}
