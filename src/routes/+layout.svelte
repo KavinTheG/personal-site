@@ -4,11 +4,12 @@
     import About from "../components/About.svelte";
     import Projects from "../components/Projects.svelte";
     import Contact from "../components/Contact.svelte";
+    import Experience from "../components/Experience.svelte";
 
 </script>
 
  
-<div class="background px-20 py-10">
+<div class="background px-[20rem] py-10">
     <Navbar/>
 
     <section id="about"> 
@@ -19,9 +20,9 @@
         <Projects/>
     </section>
 
-    <section id="contact"> 
-        <Contact/>
-    </section> 
+    <section id="experience">
+        <Experience/>
+    </section>
 </div>
 
 <slot />
