@@ -6,8 +6,12 @@
     import Contact from "../components/Contact.svelte";
     import Experience from "../components/Experience.svelte";
 
+    let title = "Kavin Gnanapandithan"
 </script>
 
+<svelte:head>
+  <title>{title}</title>
+</svelte:head>
 
 <div class="background py-10">
     <Navbar/> 
