@@ -36,7 +36,8 @@
         on:click|preventDefault={scrollIntoView}>Projects</a>
       <a href="#experience" class="triary hover:text-cyan-300 rounded-md font-medium ml-12"
         on:click|preventDefault={scrollIntoView}>Experience</a>
-      <a href="#blog" class="triary hover:text-cyan-300 rounded-md font-medium ml-12">Blog</a>
+      <a href="https://blog.kavintheg.com/" class="triary hover:text-cyan-300 rounded-md font-medium ml-12" target="_blank"
+      rel="noopener noreferrer">Blog</a>
     </nav>
   </div>
 </header>

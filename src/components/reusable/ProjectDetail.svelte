@@ -120,7 +120,7 @@
         position: relative;
         display: flex;
         z-index: 12;
-        margin: 0.05rem 0.025rem;
+        margin: 0.05rem;
         justify-content: center;
         align-items: center;
     }

@@ -26,7 +26,7 @@
     {
       src: "../assets/blog-dim.png",
       alt: "Blog",
-      link: "https://blog.kavintheg.dev/",
+      link: "https://blog.kavintheg.com/",
     }
 
   ];
@@ -97,7 +97,7 @@
           </div>
 
           <!-- Image section -->
-          <div class="w-full sm:w-1/2 flex justify-center sm:justify-end items-center order-1 sm:order-2">
+          <div class="w-full sm:w-1/2 flex m-2 justify-center sm:justify-end items-center order-1 sm:order-2">
             <div class="w-full max-w-xs">
               <img
                 src="../assets/profile-pic.png"
@@ -117,18 +117,26 @@
   .contact-icons {
     display: flex;
     justify-content: center;
-    margin-top: 20px; /* Adjust spacing from the top */
+    margin-top: 20px;
   }
 
   .contact-icons img {
-    width: 50px; /* Adjust image size as needed */
-    height: 50px; /* Adjust image size as needed */
-    margin: 0 40px; /* Adjust spacing between images */
+    width: 50px; 
+    height: 50px; 
+    margin-right: 45px;
     cursor: pointer;
     transition: transform 0.3s ease-in-out;
   }
 
   .contact-icons img:hover {
-    transform: scale(1.2); /* Adjust scale factor for hover effect */
+    transform: scale(1.2);
+  }
+
+  @media (max-width: 740px) {
+    .contact-icons img {
+      width: 35px; 
+      height: 35px; 
+      margin-right: 35px;
+    }
   }
 </style>
