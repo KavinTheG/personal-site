@@ -8,21 +8,23 @@
 
 </script>
 
- 
-<div class="background px-[20%]  py-10">
-    <Navbar/>
 
-    <section id="about"> 
-        <About/>
-    </section> 
+<div class="background py-10">
+    <Navbar/> 
+    <div class="px-[20%] ">
 
-    <section id="projects">
-        <Projects/>
-    </section>
+        <section id="about"> 
+            <About/>
+        </section> 
 
-    <section id="experience">
-        <Experience/>
-    </section>
+        <section id="projects">
+            <Projects/>
+        </section>
+
+        <section id="experience">
+            <Experience/>
+        </section>
+    </div>
 </div>
 
 <slot />
