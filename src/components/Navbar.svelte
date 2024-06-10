@@ -1,4 +1,14 @@
-<script>
+<script lang="ts">
+  import { blogLink } from "../stores/linkStore";
+  import { onDestroy } from "svelte";
+
+  let link: string;
+  const unsubscribe = blogLink.subscribe(value => {
+    link = value;
+  });
+
+  onDestroy(unsubscribe);
+
   let isMenuOpen = false;
 
   function toggleMenu() {
@@ -26,7 +36,8 @@
       <div class="dropdown sm:hidden  absolute top-full left-0 right-0 z-20">
         <a href="#about" class="block p-4 triary hover:text-cyan-300" on:click|preventDefault={scrollIntoView}>About</a>
         <a href="#projects" class="block p-4 triary hover:text-cyan-300" on:click|preventDefault={scrollIntoView}>Projects</a>
-        <a href="#blog" class="block p-4 triary hover:text-cyan-300">Blog</a>
+        <a href="#experience" class="block p-4 triary hover:text-cyan-300" on:click|preventDefault={scrollIntoView}>Projects</a>
+        <a href={link} target="_blank" rel="noopener noreferrer" class="block p-4 triary hover:text-cyan-300">Blog</a>
       </div>
     {/if}
     <nav class="hidden sm:flex flex-grow justify-end pr-4 ">
@@ -36,7 +47,7 @@
         on:click|preventDefault={scrollIntoView}>Projects</a>
       <a href="#experience" class="triary hover:text-cyan-300 rounded-md font-medium ml-12"
         on:click|preventDefault={scrollIntoView}>Experience</a>
-      <a href="https://blog.kavintheg.com/" class="triary hover:text-cyan-300 rounded-md font-medium ml-12" target="_blank"
+      <a href={link} class="triary hover:text-cyan-300 rounded-md font-medium ml-12" target="_blank"
       rel="noopener noreferrer">Blog</a>
     </nav>
   </div>

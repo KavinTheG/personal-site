@@ -1,7 +1,15 @@
 <script lang="ts">
+  import { blogLink } from "../stores/linkStore";
+  import { onDestroy } from "svelte";
   import IntersectionObserver from "svelte-intersection-observer";
   import { fade } from "svelte/transition";
 
+  let linkBlog!: string;
+  const unsubscribe = blogLink.subscribe(value => {
+    linkBlog = value;
+  });
+
+  onDestroy(unsubscribe);
 
   let node: HTMLDivElement;
 
@@ -26,7 +34,7 @@
     {
       src: "../assets/blog-dim.png",
       alt: "Blog",
-      link: "https://blog.kavintheg.com/",
+      link: linkBlog,
     }
 
   ];
@@ -50,7 +58,7 @@
     {
       src: "../assets/blog-bright.png",
       alt: "Blog",
-      link: "https://blog.kavintheg.dev/",
+      link: linkBlog,
     }
   ];
 </script>
