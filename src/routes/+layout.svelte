@@ -15,7 +15,7 @@
 
 <div class="background py-10">
     <Navbar/> 
-    <div class="px-[20%] ">
+    <div class="margins">
 
         <section id="about"> 
             <About/>
@@ -32,4 +32,18 @@
 </div>
 
 <slot />
+
+<style>
+    .margins {
+        padding-left: 20%;
+        padding-right: 20%;
+    }
+
+    @media (max-width: 740px) {
+        .margins {
+            padding-left: 15%;
+            padding-right: 15%;
+        }
+    }
+</style>
 
