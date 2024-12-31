@@ -17,17 +17,26 @@
   };
 
   const uoavProject = {
-    imageSrc: '../assets/uoav.png',
+    imageSrc: '../assets/motor_controller.gif',
     title: 'Embedded Team Lead @ UOttawa Autonomous Vehicle Team',
-    description: `Responsible for leading the embedded portion of the UOAV autonomous snowplow. Primary achievement was the communication between the Jetson Xavier ROS2 Nav2 and the HDC2460 motor drivers `,
-    githubLink: 'https://github.com/KG-Drone-Project/'
+    description: `Responsible for leading the embedded portion of the UOAV autonomous snowplow. Primary contribution was the integration of ROS2_control with custom C++ drivers 
+                  to control the HDc2460 motor drivers `,
+    githubLink: 'https://github.com/uOttawaCAV/ros-workspace/'
   };
+
+  const chip8Emu = {
+    imageSrc: '../assets/chip8.png',
+    title: 'CHIP-8 Emulator',
+    description: `Emulator written in C capable of emulating every CHIP-8 instruction.
+                  The binary can be used to play any chip8 rom with this project.`,
+    githubLink: 'https://github.com/KavinTheG/chip8'
+  }
 
   const pychessProject = {
     imageSrc: '../assets/pychess.png',
     title: 'PyChess',
-    description: `PyChess is a Python-based chess game developed using the Pygame library. This project aims to enhance coding skills and tackle the complexities of creating a functional chess game. 
-                  This project makes use of concepts from data structures and algorithms for optimal time and space complexity.`,
+    description: `PyChess is a Python-based chess game developed using the Pygame library. This project aimed to improve my coding skills by tackling the complexities of creating a functional chess game. 
+                  I made use of concepts from data structures and algorithms for optimal time and space complexity.`,
     githubLink: 'https://github.com/KavinTheG/PyChess'
   }
 
@@ -51,12 +60,20 @@
             />
            
             <!-- UOAV -->
-            <!-- ProjectDetail 
+            <ProjectDetail 
               imageSrc={uoavProject.imageSrc}
               title={uoavProject.title}
               description={uoavProject.description}
               githubLink={uoavProject.githubLink}
-            /> -->
+            /> 
+
+            <!-- CHIP8 -->
+            <ProjectDetail 
+              imageSrc={chip8Emu.imageSrc}
+              title={chip8Emu.title}
+              description={chip8Emu.description}
+              githubLink={chip8Emu.githubLink}
+            /> 
 
             <!-- Python chess -->
             <ProjectDetail
