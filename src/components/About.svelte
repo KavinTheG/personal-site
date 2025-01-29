@@ -85,9 +85,9 @@
             </h2>
             <div transition:fade={{ delay: 350 }}>
               <p class="text-lg secondary leading-relaxed py-6">
-                I am a fourth year computer engineering student at the
-                University of Ottawa. Currently, I am focused on embedded
-                development and machine learning.
+                I am a recent computer engineering graduate from the
+                University of Ottawa. Currently, I am focused on low-level 
+                programming, particularily in embedded software.  
               </p>
             </div>
             <div class="container mx-auto flex flex-col justify-center items-center">
