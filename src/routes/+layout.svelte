@@ -1,49 +1,12 @@
-<script>
-    import "../app.css";
-    import Navbar from "../components/Navbar.svelte";
-    import About from "../components/About.svelte";
-    import Projects from "../components/Projects.svelte";
-    import Contact from "../components/Contact.svelte";
-    import Experience from "../components/Experience.svelte";
+<script lang="ts">
+	import '../app.css';
+	import favicon from '$lib/assets/favicon.svg';
 
-    let title = "Kavin Gnanapandithan"
+	let { children } = $props();
 </script>
 
 <svelte:head>
-  <title>{title}</title>
+	<link rel="icon" href={favicon} />
 </svelte:head>
 
-<div class="background py-10">
-    <Navbar/> 
-    <div class="margins">
-
-        <section id="about"> 
-            <About/>
-        </section> 
-
-        <section id="projects">
-            <Projects/>
-        </section>
-
-        <section id="experience">
-            <Experience/>
-        </section>
-    </div>
-</div>
-
-<slot />
-
-<style>
-    .margins {
-        padding-left: 20%;
-        padding-right: 20%;
-    }
-
-    @media (max-width: 740px) {
-        .margins {
-            padding-left: 15%;
-            padding-right: 15%;
-        }
-    }
-</style>
-
+{@render children?.()}
