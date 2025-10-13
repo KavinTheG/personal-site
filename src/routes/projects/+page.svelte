@@ -300,16 +300,6 @@
 	.pr-title:hover {
 		color: var(--lapis-lazuli);
 	}
-	/* OS-specific tag styling - uses same base but with vista-blue colors */
-	.os-tag {
-		background: rgba(147, 154, 222, 0.15);
-		color: var(--vista-blue);
-		border: 1px solid var(--vista-blue);
-	}
-	.os-tag:hover {
-		background: rgba(147, 154, 222, 0.25);
-		transform: translateY(-2px);
-	}
 	.notes-list {
 		list-style-type: disc;
 		padding-left: 1.5rem;
