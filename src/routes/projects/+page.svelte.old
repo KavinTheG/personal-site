@@ -1,0 +1,559 @@
+<script lang="ts">
+	import Grid from 'svelte-grid';
+	import gridHelp from 'svelte-grid/build/helper/index.mjs';
+	import projects from '$lib/Projects';
+	import { colours } from '$lib/Colours';
+	import Icon from '@iconify/svelte';
+	import { onMount } from 'svelte';
+
+	const id = () => '_' + Math.random().toString(36).substr(2, 9);
+
+	let items: any[] = [];
+	let imageDimensions: Map<string, { width: number; height: number }> = new Map();
+	let isMobile = false;
+
+	// Check if device is mobile
+	function checkMobile() {
+		isMobile = window.innerWidth < 768;
+	}
+
+	// Function to load image and get its dimensions
+	async function getImageDimensions(src: string): Promise<{ width: number; height: number }> {
+		return new Promise((resolve, reject) => {
+			const img = new Image();
+			img.onload = () => {
+				resolve({ width: img.naturalWidth, height: img.naturalHeight });
+			};
+			img.onerror = reject;
+			img.src = src;
+		});
+	}
+
+	// Function to calculate optimal max dimensions based on content and image
+	function calculateMaxDimensions(project: any, imgDims?: { width: number; height: number }) {
+		const descriptionLength = project.description.length;
+		const rowHeight = 100; // matches the Grid rowHeight prop
+
+		let maxW = 5; // Allow good horizontal expansion
+		let maxH = 4; // Default vertical expansion
+
+		// Adjust based on description length
+		if (descriptionLength > 400) {
+			maxH = Math.max(maxH, 6);
+		} else if (descriptionLength > 250) {
+			maxH = Math.max(maxH, 5);
+		} else {
+			maxH = Math.max(maxH, 4);
+		}
+
+		// Adjust based on image aspect ratio if available
+		if (imgDims) {
+			const aspectRatio = imgDims.width / imgDims.height;
+
+			// Calculate how many grid rows needed to show full image
+			// Assuming average card width of ~400px when expanded
+			const estimatedCardWidth = 400;
+			const imageHeightInCard = estimatedCardWidth / aspectRatio;
+			const gridRowsNeeded = Math.ceil(imageHeightInCard / rowHeight);
+
+			// If image is very tall (portrait), allow much more vertical space
+			if (aspectRatio < 0.6) {
+				maxH = Math.max(maxH, Math.min(gridRowsNeeded + 2, 8));
+				maxW = Math.max(maxW, 5);
+			} else if (aspectRatio < 1) {
+				maxH = Math.max(maxH, Math.min(gridRowsNeeded + 1, 6));
+				maxW = Math.max(maxW, 4);
+			}
+			// If image is very wide (landscape), allow more horizontal space
+			else if (aspectRatio > 1.8) {
+				maxW = Math.max(maxW, 6);
+				maxH = Math.max(maxH, 4);
+			} else if (aspectRatio > 1.3) {
+				maxW = Math.max(maxW, 5);
+				maxH = Math.max(maxH, 4);
+			}
+			// Square-ish images
+			else {
+				maxW = Math.max(maxW, 4);
+				maxH = Math.max(maxH, 4);
+			}
+		}
+
+		return { maxW, maxH };
+	}
+
+	// Initialize items with default dimensions
+	function initializeItems() {
+		items = projects.map((project, i) => {
+			const { maxW, maxH } = calculateMaxDimensions(project);
+
+			return {
+				id: id(),
+				data: project,
+				5: gridHelp.item({
+					x: 0,
+					y: i * 3,
+					w: 2,
+					h: 2,
+					max: { w: maxW, h: maxH }
+				}),
+				3: gridHelp.item({
+					x: 0,
+					y: i * 3,
+					w: 2,
+					h: 2,
+					max: { w: 3, h: maxH }
+				}),
+				1: gridHelp.item({
+					x: 0,
+					y: i * 3,
+					w: 1,
+					h: 2,
+					max: { w: 1, h: maxH }
+				})
+			};
+		});
+	}
+
+	// Update items with image dimensions
+	async function updateItemsWithImageDimensions() {
+		// Load all image dimensions
+		for (const project of projects) {
+			try {
+				const dims = await getImageDimensions(project.imageSrc);
+				imageDimensions.set(project.imageSrc, dims);
+				console.log(
+					`Image: ${project.title}, Dimensions: ${dims.width}x${dims.height}, Aspect: ${(dims.width / dims.height).toFixed(2)}`
+				);
+			} catch (error) {
+				console.error(`Failed to load image: ${project.imageSrc}`, error);
+			}
+		}
+
+		// Recalculate items with image dimensions
+		items = projects.map((project, i) => {
+			const imgDims = imageDimensions.get(project.imageSrc);
+			const { maxW, maxH } = calculateMaxDimensions(project, imgDims);
+
+			console.log(`Project: ${project.title}, Max: ${maxW}x${maxH}`);
+
+			return {
+				id: id(),
+				data: project,
+				5: gridHelp.item({
+					x: 0,
+					y: i * 3,
+					w: 2,
+					h: 2,
+					max: { w: maxW, h: maxH }
+				}),
+				3: gridHelp.item({
+					x: 0,
+					y: i * 3,
+					w: 2,
+					h: 2,
+					max: { w: 3, h: maxH }
+				}),
+				1: gridHelp.item({
+					x: 0,
+					y: i * 3,
+					w: 1,
+					h: 2,
+					max: { w: 1, h: maxH }
+				})
+			};
+		});
+	}
+
+	onMount(async () => {
+		checkMobile();
+		window.addEventListener('resize', checkMobile);
+
+		initializeItems();
+		await updateItemsWithImageDimensions();
+
+		return () => {
+			window.removeEventListener('resize', checkMobile);
+		};
+	});
+
+	const cols = [
+		[1100, 5],
+		[800, 3],
+		[500, 1]
+	];
+
+	// Function to get current item dimensions
+	function getItemDimensions(item: any) {
+		if (item[5]) return { w: item[5].w, h: item[5].h };
+		if (item[3]) return { w: item[3].w, h: item[3].h };
+		if (item[1]) return { w: item[1].w, h: item[1].h };
+		return { w: 2, h: 2 };
+	}
+</script>
+
+<div class="page-wrapper">
+	<div class="container">
+		<h1 class="grid-instruction">
+			{#if isMobile}
+				My Projects
+			{:else}
+				Drag on the bottom right to expand!
+			{/if}
+		</h1>
+
+		{#if isMobile}
+			<!-- Mobile: Simple vertical list -->
+			<div class="mobile-list">
+				{#each projects as project}
+					<div class="mobile-card">
+						<div class="mobile-image-container">
+							<img src={project.imageSrc} alt={project.title} class="mobile-image" />
+						</div>
+						<h3 class="mobile-title">{project.title}</h3>
+						<p class="mobile-description">{project.description}</p>
+						<a
+							href={project.githubLink}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="mobile-github-link"
+						>
+							<Icon icon="mdi:github" width="24" height="24" />
+							View on GitHub
+						</a>
+					</div>
+				{/each}
+			</div>
+		{:else}
+			<!-- Desktop: Grid layout -->
+			{#if items.length > 0}
+				<Grid bind:items rowHeight={100} {cols} let:item let:dataItem>
+					{@const dims = getItemDimensions(dataItem)}
+					{@const isWide = dims.w > 2 && dims.h <= 2}
+					{@const isTall = dims.h > 2 && dims.w <= 2}
+					{@const isLarge = dims.w > 2 && dims.h > 2}
+					<div class="grid-item">
+						{#if isLarge}
+							<!-- Large view: split layout (both expanded) -->
+							<div class="large-layout">
+								<div class="large-left">
+									<h3>{dataItem.data.title}</h3>
+									<div class="description-wrapper">
+										<p class="description">{dataItem.data.description}</p>
+									</div>
+									<a
+										href={dataItem.data.githubLink}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="github-link"
+									>
+										<Icon icon="mdi:github" width="24" height="24" />
+										View on GitHub
+									</a>
+								</div>
+								<div class="large-right">
+									<img src={dataItem.data.imageSrc} alt={dataItem.data.title} />
+								</div>
+							</div>
+						{:else if isWide || isTall}
+							<!-- Expanded view: vertical stack with scroll -->
+							<div class="vertical-layout">
+								<div class="vertical-content">
+									<div class="vertical-image-container">
+										<img
+											src={dataItem.data.imageSrc}
+											alt={dataItem.data.title}
+											class="vertical-image"
+										/>
+									</div>
+									<h3>{dataItem.data.title}</h3>
+									<p class="description">{dataItem.data.description}</p>
+									<a
+										href={dataItem.data.githubLink}
+										target="_blank"
+										rel="noopener noreferrer"
+										class="github-link"
+									>
+										<Icon icon="mdi:github" width="24" height="24" />
+										View on GitHub
+									</a>
+								</div>
+							</div>
+						{:else}
+							<!-- Small view: compact layout -->
+							<div class="small-layout">
+								<img src={dataItem.data.imageSrc} alt={dataItem.data.title} class="small-image" />
+								<h3>{dataItem.data.title}</h3>
+							</div>
+						{/if}
+					</div>
+				</Grid>
+			{/if}
+		{/if}
+	</div>
+</div>
+
+<style>
+	.page-wrapper {
+		background: var(--background);
+		min-height: 100vh;
+		padding: 2rem 1rem;
+	}
+
+	.container {
+		max-width: 1100px;
+		width: 100%;
+		margin: 0 auto;
+	}
+
+	.grid-instruction {
+		font-size: 1.5rem;
+		text-align: left;
+		margin-bottom: 1.5rem;
+		color: var(--accent);
+		font-weight: 500;
+	}
+
+	/* Mobile list styles */
+	.mobile-list {
+		display: flex;
+		flex-direction: column;
+		gap: 2rem;
+	}
+
+	.mobile-card {
+		background: rgba(150, 217, 212, 0.05);
+		color: var(--accent);
+		padding: 20px;
+		border-radius: 15px;
+		border: 2px solid var(--accent);
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+		display: flex;
+		flex-direction: column;
+		gap: 15px;
+	}
+
+	.mobile-image-container {
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+
+	.mobile-image {
+		max-width: 100%;
+		max-height: 300px;
+		object-fit: contain;
+		border-radius: 10px;
+	}
+
+	.mobile-title {
+		margin: 0;
+		font-size: 1.5rem;
+		font-weight: 600;
+		text-align: center;
+		color: var(--accent);
+	}
+
+	.mobile-description {
+		margin: 0;
+		font-size: 0.95rem;
+		line-height: 1.6;
+		color: rgba(150, 217, 212, 0.9);
+		text-align: left;
+	}
+
+	.mobile-github-link {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		gap: 8px;
+		color: var(--accent);
+		text-decoration: none;
+		font-size: 1rem;
+		transition: opacity 0.2s ease;
+		padding: 10px;
+		background: rgba(150, 217, 212, 0.1);
+		border-radius: 8px;
+	}
+
+	.mobile-github-link:hover {
+		opacity: 0.8;
+	}
+
+	/* Grid item styles */
+	.grid-item {
+		background: rgba(150, 217, 212, 0.05);
+		color: var(--accent);
+		padding: 20px;
+		border-radius: 15px;
+		border: 2px solid var(--accent);
+		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+		transition:
+			transform 0.2s ease,
+			box-shadow 0.2s ease,
+			background 0.2s ease;
+		height: 100%;
+		box-sizing: border-box;
+		cursor: pointer;
+		overflow: hidden;
+		position: relative;
+	}
+
+	.grid-item:hover {
+		transform: translateY(-6px);
+		background: rgba(150, 217, 212, 0.1);
+		box-shadow:
+			0 12px 25px rgba(0, 0, 0, 0.5),
+			0 0 20px rgba(150, 217, 212, 0.3);
+	}
+
+	/* Small layout */
+	.small-layout {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		gap: 12px;
+	}
+
+	.small-image {
+		width: 60px;
+		height: 60px;
+		object-fit: cover;
+		border-radius: 8px;
+	}
+
+	.small-layout h3 {
+		margin: 0;
+		font-size: 1.1rem;
+		font-weight: 600;
+		text-align: center;
+	}
+
+	/* Vertical layout (expanded horizontally or vertically) */
+	.vertical-layout {
+		height: 100%;
+		overflow-y: auto;
+		overflow-x: hidden;
+	}
+
+	.vertical-content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		gap: 15px;
+		padding: 10px 5px;
+		min-height: 100%;
+	}
+
+	.vertical-image-container {
+		width: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex-shrink: 0;
+	}
+
+	.vertical-image {
+		max-width: 90%;
+		max-height: 400px;
+		object-fit: contain;
+		border-radius: 10px;
+	}
+
+	.vertical-layout h3 {
+		margin: 0;
+		font-size: 1.3rem;
+		font-weight: 600;
+		text-align: center;
+	}
+
+	.vertical-layout .description {
+		text-align: center;
+		font-size: 0.9rem;
+		max-width: 90%;
+		line-height: 1.5;
+	}
+
+	/* Large layout (both horizontal and vertical expansion) */
+	.large-layout {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		height: 100%;
+		gap: 20px;
+		overflow: hidden;
+	}
+
+	.large-left {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+		align-items: flex-start;
+		gap: 15px;
+		padding-right: 10px;
+		overflow-y: auto;
+		min-height: 0;
+	}
+
+	.large-left h3 {
+		margin: 0;
+		font-size: 1.5rem;
+		font-weight: 600;
+	}
+
+	.description-wrapper {
+		flex: 1;
+		overflow-y: auto;
+		min-height: 0;
+	}
+
+	.description {
+		margin: 0;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		color: rgba(150, 217, 212, 0.9);
+	}
+
+	.github-link {
+		display: flex;
+		align-items: center;
+		gap: 8px;
+		color: var(--accent);
+		text-decoration: none;
+		font-size: 0.95rem;
+		transition: opacity 0.2s ease;
+		flex-shrink: 0;
+	}
+
+	.github-link:hover {
+		opacity: 0.8;
+	}
+
+	.large-right {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		overflow: hidden;
+		min-height: 0;
+	}
+
+	.large-right img {
+		max-width: 100%;
+		max-height: 100%;
+		object-fit: contain;
+		border-radius: 10px;
+	}
+
+	:root {
+		--background: #0e1317;
+		--accent: #96d9d4;
+	}
+
+	:global(body) {
+		background: var(--background);
+		margin: 0;
+		padding: 0;
+	}
+</style>
