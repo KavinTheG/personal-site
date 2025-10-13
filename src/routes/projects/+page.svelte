@@ -99,7 +99,6 @@
 		</div>
 	</div>
 </div>
-
 <style>
 	:global(body) {
 		background: var(--eerie-black);
@@ -116,6 +115,7 @@
 		max-width: 1400px;
 		width: 100%;
 		margin: 0 auto;
+		padding: 0 1rem; /* Add explicit padding */
 	}
 
 	.two-column-layout {
@@ -128,6 +128,45 @@
 	@media (max-width: 1024px) {
 		.two-column-layout {
 			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 768px) {
+		.page-wrapper {
+			padding: 1.5rem 0.75rem; /* Reduced but still has padding */
+		}
+		
+		.container {
+			padding: 0 0.75rem; /* Ensure side padding on mobile */
+		}
+		
+		.two-column-layout {
+			gap: 2rem;
+		}
+		
+		.project-card,
+		.contribution-block {
+			padding: 20px; /* Slightly reduced card padding on mobile */
+		}
+	}
+
+	@media (max-width: 480px) {
+		.page-wrapper {
+			padding: 1rem 0.5rem;
+		}
+		
+		.container {
+			padding: 0 0.5rem;
+		}
+		
+		.project-card,
+		.contribution-block {
+			padding: 18px;
+		}
+		
+		.page-title,
+		.os-page-title {
+			font-size: 1.75rem; /* Slightly smaller on very small screens */
 		}
 	}
 
@@ -201,9 +240,9 @@
 	}
 	.project-links {
 		display: flex;
-		justify-content: center; /* centers horizontally */
+		justify-content: center;
 		align-items: center;
-		gap: 1.5rem; /* space between icons */
+		gap: 1.5rem;
 		margin-top: 1rem;
 	}
 	.tag {
@@ -238,11 +277,13 @@
 		color: var(--bright-blue);
 		text-decoration: none;
 		font-size: 0.9rem;
-		transition: color 0.2s ease;
+		transition: 
+			color 0.2s ease,
+			transform 0.2s ease;
 	}
 	.github-link:hover {
 		color: var(--plum-web);
-		transform: scale(1.15); /* slight magnify effect */
+		transform: scale(1.15);
 	}
 	/* Open Source Contributions Styles - Vista Blue theme */
 	.opensource-section {
@@ -251,7 +292,7 @@
 		gap: 2rem;
 	}
 	.contribution-block {
-		background: rgba(147, 154, 222, 0.08); /* Vista blue with low opacity */
+		background: rgba(147, 154, 222, 0.08);
 		padding: 25px;
 		border-radius: 15px;
 		border: 1px solid rgba(147, 154, 222, 0.2);
@@ -304,7 +345,7 @@
 		list-style-type: disc;
 		padding-left: 1.5rem;
 		margin: 0;
-		color: rgba(147, 154, 222, 0.85); /* Vista blue tinted text */
+		color: rgba(147, 154, 222, 0.85);
 	}
 	.notes-list li {
 		font-size: 0.85rem;
