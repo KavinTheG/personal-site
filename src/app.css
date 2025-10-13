@@ -1,2 +1,21 @@
 @import 'tailwindcss';
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400;1,500;1,700&display=swap');
 @plugin '@tailwindcss/typography';
+
+
+:root {
+  /* Custom color palette */
+  --plum-web: #db91d3;
+  --lapis-lazuli: #4a659d;
+  --eerie-black: #15171a;
+  --rose-ebony: #6c5050;
+  --vista-blue: #939ade;
+  --bright-blue: #96d9d4;
+
+}
+
+body {
+  background: var(--eerie-black);
+  margin: 0;
+  padding: 0;
+}

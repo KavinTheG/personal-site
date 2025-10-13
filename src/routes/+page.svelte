@@ -2,8 +2,7 @@
 	import { onMount } from 'svelte';
 	import typewriter from '$lib/transitions/typewriter';
 	import skills from '$lib/Skills';
-	import { colours } from '$lib/Colours'; // <-- import your color config
-
+	import Navbar from '../components/Navbar.svelte';
 	let show = false;
 
 	onMount(() => {
@@ -11,7 +10,7 @@
 	});
 </script>
 
-<div class="about-wrapper" style="background-color: {colours.background}; color: {colours.accent};">
+<div class="about-wrapper">
 	<div class="about-container">
 		<div class="text-section">
 			{#if show}
@@ -20,8 +19,8 @@
 
 			<p>
 				I'm a computer engineering graduate. I enjoy writing software that leverages knowledge of
-				hardware. This includes embedded software, compilers, etc. Take a look at my projects to get
-				a feel. I also write about my projects on my blog too!
+				hardware. Take a look at my projects to get a feel. I also write about my projects on my
+				blog too!
 			</p>
 		</div>
 
@@ -38,6 +37,8 @@
 		justify-content: center;
 		height: 100vh;
 		width: 100%;
+
+		background-color: var(--eerie-black);
 	}
 
 	.about-container {
@@ -61,11 +62,13 @@
 	h1 {
 		font-size: 3.5rem;
 		margin-bottom: 1.5rem;
+		color: var(--bright-blue);
 	}
 
 	p {
 		font-size: 1.5rem;
 		line-height: 1.6;
+		color: var(--bright-blue);
 	}
 
 	.image-section {
