@@ -66,6 +66,13 @@
 					{#each openSourceContributions as contribution}
 						<div class="contribution-block">
 							<h2 class="repo-title">{contribution.repo}</h2>
+								<div class="repo-tags">
+										{#if contribution.tag?.length}
+											{#each contribution.tag as tag}
+												<span class="tag">{tag}</span>
+											{/each}
+										{/if}
+                </div>
 
 							<!-- Tags for entire repo (above PRs) -->
 							{#if contribution.prs.some((pr) => pr.tag?.length)}
